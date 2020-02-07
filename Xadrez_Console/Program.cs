@@ -1,7 +1,8 @@
-﻿using ChessBoard;
+﻿using Board;
 using System;
+using XadrezConsole.Chess;
 
-namespace Xadrez_Console
+namespace XadrezConsole
 {
     class Program
     {
@@ -9,8 +10,11 @@ namespace Xadrez_Console
         {
             Chessboard chessboard = new Chessboard(8, 8);
 
-            Screen.showChessboard(chessboard);
+            chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(0, 0));
+            chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(1, 3));
+            chessboard.InsertPiece(new King(chessboard, Color.Black), new Position(2, 4));
 
+            Screen.ShowChessboard(chessboard);
 
             Console.ReadKey();
         }

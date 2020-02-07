@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChessBoard
+﻿namespace Board
 {
     class Position
     {
@@ -17,7 +13,7 @@ namespace ChessBoard
 
         public override string ToString()
         {
-         return   line + ", " + column;
+            return line + ", " + column;
         }
     }
 }
