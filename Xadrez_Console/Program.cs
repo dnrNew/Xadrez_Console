@@ -7,7 +7,10 @@ namespace Xadrez_Console
     {
         static void Main(string[] args)
         {
-            Chessboard tab = new Chessboard(8, 8);
+            Chessboard chessboard = new Chessboard(8, 8);
+
+            Screen.showChessboard(chessboard);
+
 
             Console.ReadKey();
         }
