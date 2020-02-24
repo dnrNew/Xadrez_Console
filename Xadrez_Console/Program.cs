@@ -1,4 +1,5 @@
 ﻿using Board;
+using Chess;
 using System;
 using XadrezConsole.Chess;
 
@@ -10,19 +11,23 @@ namespace XadrezConsole
         {
             try
             {
-                PositionChess position = new PositionChess('c',7);
-                Console.WriteLine(position);
+                GameChess gameChess = new GameChess();
 
-                Console.WriteLine(position.ToPosition());
+                while (!gameChess.finished)
+                {
+                    Console.Clear();
+                    Screen.ShowChessboard(gameChess.chessboard);
 
-                //Chessboard chessboard = new Chessboard(8, 8);
+                    Console.WriteLine();
+                    Console.Write("Origin: ");
+                    Position origin = Screen.ReadPositionChess().ToPosition();
+                    Console.Write("Destiny: ");
+                    Position destiny = Screen.ReadPositionChess().ToPosition();
 
-                //chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(0, 0));
-                //chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(1, 3));
-                //chessboard.InsertPiece(new King(chessboard, Color.Black), new Position(2, 4));
+                    gameChess.playMove(origin, destiny);
 
-                //Screen.ShowChessboard(chessboard);
-                
+                }
+
             }
             catch (BoardException ex)
             {
