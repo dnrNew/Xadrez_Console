@@ -9,10 +9,10 @@ namespace Chess
     class GameChess
     {
         public Chessboard chessboard { get; private set; }
-        private int turn;
-        private Color playCurrent;
+        public int turn { get; private set; }
+        public Color playCurrent { get; private set; }
         public bool finished { get; private set; }
-        
+
         public GameChess()
         {
             chessboard = new Chessboard(8, 8);
@@ -22,12 +22,39 @@ namespace Chess
             finished = false;
         }
 
-        public void playMove (Position origin, Position destiny)
+        public void PlayMove(Position origin, Position destiny)
         {
             Piece piece = chessboard.RemovePiece(origin);
             piece.AddMovesQuantity();
             Piece pieceCapture = chessboard.RemovePiece(destiny);
             chessboard.InsertPiece(piece, destiny);
+        }
+
+        public void PerformMove(Position origin, Position destiny)
+        {
+            PlayMove(origin, destiny);
+            turn++;
+            ChangePlayer();
+        }
+
+        public void ValidateOriginPosition(Position position)
+        {
+            if (chessboard.Piece(position) == null)
+                throw new BoardException("Don't exists piece in origin position selected!");
+
+            if (playCurrent != chessboard.Piece(position).color)
+                throw new BoardException("The origin piece chosen is not yours!");
+
+            if (!chessboard.Piece(position).HasPossibleMove())
+                throw new BoardException("Don't have possible moves for piece origin selected!");
+        }
+
+        private void ChangePlayer()
+        {
+            if (playCurrent == Color.White)
+                playCurrent = Color.Black;
+            else
+                playCurrent = Color.White;
         }
 
         private void InsertPieces()
