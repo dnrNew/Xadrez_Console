@@ -10,13 +10,18 @@ namespace XadrezConsole
         {
             try
             {
-                Chessboard chessboard = new Chessboard(8, 8);
+                PositionChess position = new PositionChess('c',7);
+                Console.WriteLine(position);
 
-                chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(0, 0));
-                chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(1, 3));
-                chessboard.InsertPiece(new King(chessboard, Color.Black), new Position(2, 4));
+                Console.WriteLine(position.ToPosition());
 
-                Screen.ShowChessboard(chessboard);
+                //Chessboard chessboard = new Chessboard(8, 8);
+
+                //chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(0, 0));
+                //chessboard.InsertPiece(new Tower(chessboard, Color.Black), new Position(1, 3));
+                //chessboard.InsertPiece(new King(chessboard, Color.Black), new Position(2, 4));
+
+                //Screen.ShowChessboard(chessboard);
                 
             }
             catch (BoardException ex)
