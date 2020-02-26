@@ -41,7 +41,7 @@
             return false;
         }
 
-        public bool CanMoveFor(Position position)
+        public bool IsPossibleMove(Position position)
         {
             return PossibleMoves()[position.line, position.column];
         }
