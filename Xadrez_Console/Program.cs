@@ -37,6 +37,7 @@ namespace XadrezConsole
                         Console.WriteLine();
                         Console.Write("Destiny: ");
                         Position destiny = Screen.ReadPositionChess().ToPosition();
+                        gameChess.ValidateDestinyPosition(origin, destiny);
 
                         gameChess.PerformMove(origin, destiny);
 
@@ -45,7 +46,6 @@ namespace XadrezConsole
                     {
                         Console.WriteLine();
                         Console.WriteLine(ex.Message);
-                        Console.Write("Try again: ");
                         Console.ReadLine();
                     }
                 }

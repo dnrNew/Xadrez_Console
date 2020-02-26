@@ -49,6 +49,12 @@ namespace Chess
                 throw new BoardException("Don't have possible moves for piece origin selected!");
         }
 
+        public void ValidateDestinyPosition(Position origin, Position destiny)
+        {
+            if (!chessboard.Piece(origin).CanMoveFor(destiny))
+                throw new BoardException("Destiny position invalid!");
+        }
+
         private void ChangePlayer()
         {
             if (playCurrent == Color.White)
