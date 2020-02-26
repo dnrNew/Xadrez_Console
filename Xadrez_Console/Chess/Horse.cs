@@ -1,16 +1,16 @@
 ﻿using Board;
 
-namespace XadrezConsole.Chess
+namespace Chess
 {
-    class King : Piece
+    class Horse : Piece
     {
-        public King(Chessboard chessboard, Color color) : base(chessboard, color)
+        public Horse(Chessboard chessboard, Color color) : base(chessboard, color)
         {
         }
 
         public override string ToString()
         {
-            return "K";
+            return "H";
         }
 
         public override bool[,] PossibleMoves()
@@ -19,50 +19,42 @@ namespace XadrezConsole.Chess
 
             Position matrixPosition = new Position(0, 0);
 
-            //Up
-            matrixPosition.SetValues(position.line - 1, position.column);
+            matrixPosition.SetValues(position.line - 1, position.column - 2);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //NE
-            matrixPosition.SetValues(position.line - 1, position.column + 1);
+            matrixPosition.SetValues(position.line - 2, position.column - 1);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //Right
-            matrixPosition.SetValues(position.line, position.column + 1);
+            matrixPosition.SetValues(position.line - 2, position.column + 1);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //SE
-            matrixPosition.SetValues(position.line + 1, position.column + 1);
+            matrixPosition.SetValues(position.line - 1, position.column + 2);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //Down
-            matrixPosition.SetValues(position.line + 1, position.column);
+            matrixPosition.SetValues(position.line + 1, position.column + 2);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //SO
-            matrixPosition.SetValues(position.line + 1, position.column - 1);
+            matrixPosition.SetValues(position.line + 2, position.column + 1);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //Left
-            matrixPosition.SetValues(position.line, position.column - 1);
+            matrixPosition.SetValues(position.line + 2, position.column - 1);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;
 
-            //NO
-            matrixPosition.SetValues(position.line - 1, position.column - 1);
+            matrixPosition.SetValues(position.line + 1, position.column - 2);
 
             if (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
                 matrix[matrixPosition.line, matrixPosition.column] = true;

@@ -208,19 +208,39 @@ namespace Chess
 
         private void InsertPieces()
         {
-            InsertNewPiece('c', 1, new Tower(chessboard, Color.White));
-            InsertNewPiece('b', 2, new Tower(chessboard, Color.White));
-            InsertNewPiece('d', 2, new Tower(chessboard, Color.White));
-            InsertNewPiece('e', 2, new Tower(chessboard, Color.White));
-            InsertNewPiece('e', 1, new Tower(chessboard, Color.White));
-            InsertNewPiece('d', 1, new King(chessboard, Color.White));
+            InsertNewPiece('a', 1, new Tower(chessboard, Color.White));
+            InsertNewPiece('b', 1, new Horse(chessboard, Color.White));
+            InsertNewPiece('c', 1, new Bishop(chessboard, Color.White));
+            InsertNewPiece('d', 1, new Queen(chessboard, Color.White));
+            InsertNewPiece('e', 1, new King(chessboard, Color.White));
+            InsertNewPiece('f', 1, new Bishop(chessboard, Color.White));
+            InsertNewPiece('g', 1, new Horse(chessboard, Color.White));
+            InsertNewPiece('h', 1, new Tower(chessboard, Color.White));
+            InsertNewPiece('a', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('b', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('c', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('d', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('e', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('f', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('g', 2, new Pawn(chessboard, Color.White));
+            InsertNewPiece('h', 2, new Pawn(chessboard, Color.White));
 
-            //InsertNewPiece('c', 7, new Tower(chessboard, Color.Black));
-            //InsertNewPiece('c', 8, new Tower(chessboard, Color.Black));
-            //InsertNewPiece('d', 7, new Tower(chessboard, Color.Black));
-            //InsertNewPiece('e', 7, new Tower(chessboard, Color.Black));
-            InsertNewPiece('b', 8, new Tower(chessboard, Color.Black));
-            InsertNewPiece('a', 8, new King(chessboard, Color.Black));
+            InsertNewPiece('a', 8, new Tower(chessboard, Color.Black));
+            InsertNewPiece('b', 8, new Horse(chessboard, Color.Black));
+            InsertNewPiece('c', 8, new Bishop(chessboard, Color.Black));
+            InsertNewPiece('d', 8, new Queen(chessboard, Color.Black));
+            InsertNewPiece('e', 8, new King(chessboard, Color.Black));
+            InsertNewPiece('f', 8, new Bishop(chessboard, Color.Black));
+            InsertNewPiece('g', 8, new Horse(chessboard, Color.Black));
+            InsertNewPiece('h', 8, new Tower(chessboard, Color.Black));
+            InsertNewPiece('a', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('b', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('c', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('d', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('e', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('f', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('g', 7, new Pawn(chessboard, Color.Black));
+            InsertNewPiece('h', 7, new Pawn(chessboard, Color.Black));
         }
 
     }
