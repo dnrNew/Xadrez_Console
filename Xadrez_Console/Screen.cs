@@ -1,11 +1,54 @@
 ﻿using Board;
+using Chess;
 using System;
+using System.Collections.Generic;
 using XadrezConsole.Chess;
 
 namespace XadrezConsole
 {
     class Screen
     {
+
+        public static void ShowGame(GameChess game)
+        {
+            ShowChessboard(game.chessboard);
+            Console.WriteLine();
+            ShowPiecesCaptured(game);            
+            Console.WriteLine("Turn: " + game.turn);
+            Console.WriteLine("Waiting played: " + game.playCurrent);
+
+            if(game.check)
+                Console.WriteLine("XEQUE!");
+        }
+
+        public static void ShowPiecesCaptured(GameChess game)
+        {
+            Console.WriteLine("Pieces captured: ");
+            Console.Write("White: ");
+            ShowCollectionPieces(game.PiecesCaptured(Color.White));
+
+            ConsoleColor initColor = Console.ForegroundColor;
+            Console.WriteLine();
+            Console.Write("Black: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ShowCollectionPieces(game.PiecesCaptured(Color.Black));
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.ForegroundColor = initColor;
+        }
+
+        public static void ShowCollectionPieces(HashSet<Piece> pieces)
+        {
+            Console.Write("[");
+
+            foreach (var piece in pieces)
+            {
+                Console.Write(piece + " ");
+            }
+
+            Console.Write("]");            
+        }
+
         public static void ShowChessboard(Chessboard chessboard)
         {
             for (int i = 0; i < chessboard.lines; i++)

@@ -19,10 +19,7 @@ namespace XadrezConsole
                     try
                     {
                         Console.Clear();
-                        Screen.ShowChessboard(gameChess.chessboard);
-                        Console.WriteLine();
-                        Console.WriteLine("Turn: " + gameChess.turn);
-                        Console.WriteLine("Waiting played: " + gameChess.playCurrent);
+                        Screen.ShowGame(gameChess);
 
                         Console.WriteLine();
                         Console.Write("Origin: ");

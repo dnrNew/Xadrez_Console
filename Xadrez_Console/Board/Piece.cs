@@ -20,6 +20,11 @@
             movesQuantity++;
         }
 
+        public void DeleteMovesQuantity()
+        {
+            movesQuantity--;
+        }
+
         public bool HasPossibleMove()
         {
             bool[,] matrix = PossibleMoves();
