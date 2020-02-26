@@ -48,7 +48,7 @@ namespace Chess
 
             if (pieceCapture != null)
             {
-                chessboard.InsertPiece(piece, destiny);
+                chessboard.InsertPiece(pieceCapture, destiny);
                 piecesCaptured.Remove(pieceCapture);
             }
 
@@ -59,19 +59,24 @@ namespace Chess
         {
             Piece pieceCaptured = PlayMove(origin, destiny);
 
-            if (IsXeque(playCurrent))
+            if (IsCheck(playCurrent))
             {
                 ReturnMove(origin, destiny, pieceCaptured);
                 throw new BoardException("It is not allowed to put in check!");
             }
 
-            if (IsXeque(OpponentColor(playCurrent)))
+            if (IsCheck(OpponentColor(playCurrent)))
                 check = true;
             else
                 check = false;
 
-            turn++;
-            ChangePlayer();
+            if (IsCheckMate(OpponentColor(playCurrent)))
+                finished = true;
+            else
+            {
+                turn++;
+                ChangePlayer();
+            }
         }
 
         public void ValidateOriginPosition(Position position)
@@ -146,7 +151,7 @@ namespace Chess
             return null;
         }
 
-        public bool IsXeque(Color color)
+        public bool IsCheck(Color color)
         {
             Piece king = KingSelect(color);
 
@@ -164,6 +169,37 @@ namespace Chess
             return false;
         }
 
+        public bool IsCheckMate(Color color)
+        {
+            if (!IsCheck(color))
+                return false;
+
+            foreach (Piece piece in PiecesInGame(color))
+            {
+                bool[,] matrix = piece.PossibleMoves();
+
+                for (int i = 0; i < chessboard.lines; i++)
+                {
+                    for (int j = 0; j < chessboard.columns; j++)
+                    {
+                        if (matrix[i, j])
+                        {
+                            Position origin = piece.position;
+                            Position destiny = new Position(i, j);
+                            Piece pieceCapture = PlayMove(origin, destiny);
+                            bool isCheck = IsCheck(color);
+                            ReturnMove(origin, destiny, pieceCapture);
+
+                            if (!isCheck)
+                                return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public void InsertNewPiece(char column, int line, Piece piece)
         {
             chessboard.InsertPiece(piece, new PositionChess(column, line).ToPosition());
@@ -173,18 +209,18 @@ namespace Chess
         private void InsertPieces()
         {
             InsertNewPiece('c', 1, new Tower(chessboard, Color.White));
-            InsertNewPiece('c', 2, new Tower(chessboard, Color.White));
+            InsertNewPiece('b', 2, new Tower(chessboard, Color.White));
             InsertNewPiece('d', 2, new Tower(chessboard, Color.White));
             InsertNewPiece('e', 2, new Tower(chessboard, Color.White));
             InsertNewPiece('e', 1, new Tower(chessboard, Color.White));
             InsertNewPiece('d', 1, new King(chessboard, Color.White));
 
-            InsertNewPiece('c', 7, new Tower(chessboard, Color.Black));
-            InsertNewPiece('c', 8, new Tower(chessboard, Color.Black));
-            InsertNewPiece('d', 7, new Tower(chessboard, Color.Black));
-            InsertNewPiece('e', 7, new Tower(chessboard, Color.Black));
-            InsertNewPiece('e', 8, new Tower(chessboard, Color.Black));
-            InsertNewPiece('d', 8, new King(chessboard, Color.Black));
+            //InsertNewPiece('c', 7, new Tower(chessboard, Color.Black));
+            //InsertNewPiece('c', 8, new Tower(chessboard, Color.Black));
+            //InsertNewPiece('d', 7, new Tower(chessboard, Color.Black));
+            //InsertNewPiece('e', 7, new Tower(chessboard, Color.Black));
+            InsertNewPiece('b', 8, new Tower(chessboard, Color.Black));
+            InsertNewPiece('a', 8, new King(chessboard, Color.Black));
         }
 
     }

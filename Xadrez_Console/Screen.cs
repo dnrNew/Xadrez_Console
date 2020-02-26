@@ -13,12 +13,21 @@ namespace XadrezConsole
         {
             ShowChessboard(game.chessboard);
             Console.WriteLine();
-            ShowPiecesCaptured(game);            
+            ShowPiecesCaptured(game);
             Console.WriteLine("Turn: " + game.turn);
-            Console.WriteLine("Waiting played: " + game.playCurrent);
 
-            if(game.check)
-                Console.WriteLine("XEQUE!");
+            if (!game.finished)
+            {
+                Console.WriteLine("Waiting played: " + game.playCurrent);
+
+                if (game.check)
+                    Console.WriteLine("CHECK!");
+            }
+            else
+            {
+                Console.WriteLine("Checkmate!");
+                Console.WriteLine("Win: " + game.playCurrent);
+            }
         }
 
         public static void ShowPiecesCaptured(GameChess game)
@@ -46,7 +55,7 @@ namespace XadrezConsole
                 Console.Write(piece + " ");
             }
 
-            Console.Write("]");            
+            Console.Write("]");
         }
 
         public static void ShowChessboard(Chessboard chessboard)
