@@ -2,15 +2,15 @@
 
 namespace XadrezConsole.Chess
 {
-    class Tower : Piece
+    class Rook : Piece
     {
-        public Tower(Chessboard chessboard, Color color) : base(chessboard, color)
+        public Rook(Chessboard chessboard, Color color) : base(chessboard, color)
         {
         }
 
         public override string ToString()
         {
-            return "T";
+            return "R";
         }
 
         public override bool[,] PossibleMoves()

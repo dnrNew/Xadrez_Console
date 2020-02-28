@@ -38,6 +38,26 @@ namespace Chess
             if (pieceCapture != null)
                 piecesCaptured.Add(pieceCapture);
 
+            //Special play small Castle
+            if (piece is King && destiny.column == origin.column + 2)
+            {
+                Position originRook = new Position(origin.line, origin.column + 3);
+                Position destinyRook = new Position(origin.line, origin.column + 1);
+                Piece rook = chessboard.RemovePiece(originRook);
+                rook.AddMovesQuantity();
+                chessboard.InsertPiece(rook, destinyRook);
+            }
+
+            //Special play big Castle
+            if (piece is King && destiny.column == origin.column - 2)
+            {
+                Position originRook = new Position(origin.line, origin.column - 4);
+                Position destinyRook = new Position(origin.line, origin.column - 1);
+                Piece rook = chessboard.RemovePiece(originRook);
+                rook.AddMovesQuantity();
+                chessboard.InsertPiece(rook, destinyRook);
+            }
+
             return pieceCapture;
         }
 
@@ -50,6 +70,26 @@ namespace Chess
             {
                 chessboard.InsertPiece(pieceCapture, destiny);
                 piecesCaptured.Remove(pieceCapture);
+            }
+
+            //Special play small Castle
+            if (piece is King && destiny.column == origin.column + 2)
+            {
+                Position originRook = new Position(origin.line, origin.column + 3);
+                Position destinyRook = new Position(origin.line, origin.column + 1);
+                Piece rook = chessboard.RemovePiece(destinyRook);
+                rook.DeleteMovesQuantity();
+                chessboard.InsertPiece(rook, originRook);
+            }
+
+            //Special play big Castle
+            if (piece is King && destiny.column == origin.column - 2)
+            {
+                Position originRook = new Position(origin.line, origin.column - 4);
+                Position destinyRook = new Position(origin.line, origin.column - 1);
+                Piece rook = chessboard.RemovePiece(destinyRook);
+                rook.DeleteMovesQuantity();
+                chessboard.InsertPiece(rook, originRook);
             }
 
             chessboard.InsertPiece(piece, origin);
@@ -208,14 +248,14 @@ namespace Chess
 
         private void InsertPieces()
         {
-            InsertNewPiece('a', 1, new Tower(chessboard, Color.White));
-            InsertNewPiece('b', 1, new Horse(chessboard, Color.White));
+            InsertNewPiece('a', 1, new Rook(chessboard, Color.White));
+            InsertNewPiece('b', 1, new Knight(chessboard, Color.White));
             InsertNewPiece('c', 1, new Bishop(chessboard, Color.White));
             InsertNewPiece('d', 1, new Queen(chessboard, Color.White));
-            InsertNewPiece('e', 1, new King(chessboard, Color.White));
+            InsertNewPiece('e', 1, new King(chessboard, Color.White, this));
             InsertNewPiece('f', 1, new Bishop(chessboard, Color.White));
-            InsertNewPiece('g', 1, new Horse(chessboard, Color.White));
-            InsertNewPiece('h', 1, new Tower(chessboard, Color.White));
+            InsertNewPiece('g', 1, new Knight(chessboard, Color.White));
+            InsertNewPiece('h', 1, new Rook(chessboard, Color.White));
             InsertNewPiece('a', 2, new Pawn(chessboard, Color.White));
             InsertNewPiece('b', 2, new Pawn(chessboard, Color.White));
             InsertNewPiece('c', 2, new Pawn(chessboard, Color.White));
@@ -225,14 +265,14 @@ namespace Chess
             InsertNewPiece('g', 2, new Pawn(chessboard, Color.White));
             InsertNewPiece('h', 2, new Pawn(chessboard, Color.White));
 
-            InsertNewPiece('a', 8, new Tower(chessboard, Color.Black));
-            InsertNewPiece('b', 8, new Horse(chessboard, Color.Black));
+            InsertNewPiece('a', 8, new Rook(chessboard, Color.Black));
+            InsertNewPiece('b', 8, new Knight(chessboard, Color.Black));
             InsertNewPiece('c', 8, new Bishop(chessboard, Color.Black));
             InsertNewPiece('d', 8, new Queen(chessboard, Color.Black));
-            InsertNewPiece('e', 8, new King(chessboard, Color.Black));
+            InsertNewPiece('e', 8, new King(chessboard, Color.Black, this));
             InsertNewPiece('f', 8, new Bishop(chessboard, Color.Black));
-            InsertNewPiece('g', 8, new Horse(chessboard, Color.Black));
-            InsertNewPiece('h', 8, new Tower(chessboard, Color.Black));
+            InsertNewPiece('g', 8, new Knight(chessboard, Color.Black));
+            InsertNewPiece('h', 8, new Rook(chessboard, Color.Black));
             InsertNewPiece('a', 7, new Pawn(chessboard, Color.Black));
             InsertNewPiece('b', 7, new Pawn(chessboard, Color.Black));
             InsertNewPiece('c', 7, new Pawn(chessboard, Color.Black));
