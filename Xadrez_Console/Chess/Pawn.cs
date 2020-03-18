@@ -1,11 +1,14 @@
 ﻿using Board;
+using Chess;
 
 namespace XadrezConsole.Chess
 {
     class Pawn : Piece
     {
+        private GameChess gameChess;
+
         public Pawn(Chessboard chessboard, Color color) : base(chessboard, color)
-        {
+        {           
         }
 
         public override string ToString()
