@@ -46,7 +46,6 @@
             return PossibleMoves()[position.line, position.column];
         }
 
-
         public abstract bool[,] PossibleMoves();
 
     }

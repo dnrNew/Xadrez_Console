@@ -29,7 +29,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line - 1, position.column - 1);
+                matrixPosition.SetValues(matrixPosition.line - 1, matrixPosition.column - 1);
             }
 
             //NE
@@ -42,7 +42,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line - 1, position.column + 1);
+                matrixPosition.SetValues(matrixPosition.line - 1, matrixPosition.column + 1);
             }
 
             //SE
@@ -55,7 +55,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line + 1, position.column + 1);
+                matrixPosition.SetValues(matrixPosition.line + 1, matrixPosition.column + 1);
             }
 
             //SO
@@ -68,7 +68,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line + 1, position.column - 1);
+                matrixPosition.SetValues(matrixPosition.line + 1, matrixPosition.column - 1);
             }
 
             return matrix;

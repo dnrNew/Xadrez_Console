@@ -19,8 +19,8 @@ namespace XadrezConsole.Chess
 
             Position matrixPosition = new Position(0, 0);
 
-            //Up
-            matrixPosition.SetValues(position.line - 1, position.column);
+            //Left
+            matrixPosition.SetValues(position.line, position.column - 1);
 
             while (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
             {
@@ -29,20 +29,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line - 1, position.column);
-            }
-
-            //Down
-            matrixPosition.SetValues(position.line + 1, position.column);
-
-            while (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
-            {
-                matrix[matrixPosition.line, matrixPosition.column] = true;
-
-                if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
-                    break;
-
-                matrixPosition.SetValues(position.line + 1, position.column);
+                matrixPosition.SetValues(matrixPosition.line, matrixPosition.column - 1);
             }
 
             //Right
@@ -55,11 +42,11 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line, position.column + 1);
+                matrixPosition.SetValues(matrixPosition.line, matrixPosition.column + 1);
             }
 
-            //Left
-            matrixPosition.SetValues(position.line, position.column - 1);
+            //Up
+            matrixPosition.SetValues(position.line - 1, position.column);
 
             while (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
             {
@@ -68,7 +55,20 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line, position.column -1);
+                matrixPosition.SetValues(matrixPosition.line - 1, matrixPosition.column);
+            }
+
+            //Down
+            matrixPosition.SetValues(position.line + 1, position.column);
+
+            while (chessboard.PositionValidated(matrixPosition) && CanMove(matrixPosition))
+            {
+                matrix[matrixPosition.line, matrixPosition.column] = true;
+
+                if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
+                    break;
+
+                matrixPosition.SetValues(matrixPosition.line + 1, matrixPosition.column);
             }
 
             //NO
@@ -81,7 +81,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line - 1, position.column - 1);
+                matrixPosition.SetValues(matrixPosition.line - 1, matrixPosition.column - 1);
             }
 
             //NE
@@ -94,7 +94,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line - 1, position.column + 1);
+                matrixPosition.SetValues(matrixPosition.line - 1, matrixPosition.column + 1);
             }
 
             //SE
@@ -107,7 +107,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line + 1, position.column + 1);
+                matrixPosition.SetValues(matrixPosition.line + 1, matrixPosition.column + 1);
             }
 
             //SO
@@ -120,7 +120,7 @@ namespace XadrezConsole.Chess
                 if (chessboard.Piece(matrixPosition) != null && chessboard.Piece(matrixPosition).color != color)
                     break;
 
-                matrixPosition.SetValues(position.line + 1, position.column - 1);
+                matrixPosition.SetValues(matrixPosition.line + 1, matrixPosition.column - 1);
             }
 
             return matrix;

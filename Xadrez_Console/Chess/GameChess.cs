@@ -72,6 +72,8 @@ namespace Chess
                 piecesCaptured.Remove(pieceCapture);
             }
 
+            chessboard.InsertPiece(piece, origin);
+
             //Special play small Castle
             if (piece is King && destiny.column == origin.column + 2)
             {
@@ -91,8 +93,6 @@ namespace Chess
                 rook.DeleteMovesQuantity();
                 chessboard.InsertPiece(rook, originRook);
             }
-
-            chessboard.InsertPiece(piece, origin);
         }
 
         public void PerformMove(Position origin, Position destiny)
@@ -171,8 +171,6 @@ namespace Chess
             piecesGame.ExceptWith(PiecesCaptured(color));
             return piecesGame;
         }
-
-
 
         public bool IsCheck(Color color)
         {

@@ -5,8 +5,6 @@ namespace XadrezConsole.Chess
 {
     class Pawn : Piece
     {
-        private GameChess gameChess;
-
         public Pawn(Chessboard chessboard, Color color) : base(chessboard, color)
         {           
         }
@@ -41,9 +39,8 @@ namespace XadrezConsole.Chess
                     matrix[matrixPosition.line, matrixPosition.column] = true;
 
                 matrixPosition.SetValues(position.line - 2, position.column);
-                Position position2 = new Position(position.line - 1, position.column);
 
-                if (chessboard.PositionValidated(position2) && FreePosition(position2) && chessboard.PositionValidated(matrixPosition) && FreePosition(matrixPosition) && movesQuantity == 0)
+                if (chessboard.PositionValidated(matrixPosition) && FreePosition(matrixPosition) && movesQuantity == 0)
                     matrix[matrixPosition.line, matrixPosition.column] = true;
 
                 matrixPosition.SetValues(position.line - 1, position.column - 1);
@@ -64,9 +61,8 @@ namespace XadrezConsole.Chess
                     matrix[matrixPosition.line, matrixPosition.column] = true;
 
                 matrixPosition.SetValues(position.line + 2, position.column);
-                Position position2 = new Position(position.line + 1, position.column);
 
-                if (chessboard.PositionValidated(position2) && FreePosition(position2) && chessboard.PositionValidated(matrixPosition) && FreePosition(matrixPosition) && movesQuantity == 0)
+                if (chessboard.PositionValidated(matrixPosition) && FreePosition(matrixPosition) && movesQuantity == 0)
                     matrix[matrixPosition.line, matrixPosition.column] = true;
 
                 matrixPosition.SetValues(position.line + 1, position.column - 1);
