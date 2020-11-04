@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using Board;
 using XadrezConsole.Chess;
 
@@ -15,6 +16,7 @@ namespace Chess
         private HashSet<Piece> pieces;
         private HashSet<Piece> piecesCaptured;
         public bool check { get; private set; }
+        public Piece vulnerableEnPassant { get; private set; }
 
         public GameChess()
         {
@@ -26,6 +28,7 @@ namespace Chess
             piecesCaptured = new HashSet<Piece>();
             InsertPieces();
             check = false;
+            vulnerableEnPassant = null;
         }
 
         public Piece PlayMove(Position origin, Position destiny)
@@ -56,6 +59,23 @@ namespace Chess
                 Piece rook = chessboard.RemovePiece(originRook);
                 rook.AddMovesQuantity();
                 chessboard.InsertPiece(rook, destinyRook);
+            }
+
+            //Special play En Passant
+            if (piece is Pawn)
+            {
+                if (origin.column != destiny.column && pieceCapture == null)
+                {
+                    Position positionPiece;
+
+                    if (piece.color == Color.White)
+                        positionPiece = new Position(destiny.line + 1, destiny.column);
+                    else
+                        positionPiece = new Position(destiny.line - 1, destiny.column);
+
+                    pieceCapture = chessboard.RemovePiece(positionPiece);
+                    piecesCaptured.Add(pieceCapture);
+                }
             }
 
             return pieceCapture;
@@ -93,6 +113,23 @@ namespace Chess
                 rook.DeleteMovesQuantity();
                 chessboard.InsertPiece(rook, originRook);
             }
+
+            //Special play En Passant
+            if (piece is Pawn)
+            {
+                if (origin.column != destiny.column && pieceCapture == vulnerableEnPassant)
+                {
+                    Piece pawn = chessboard.RemovePiece(destiny);
+                    Position piecePosition;
+
+                    if (piece.color == Color.White)
+                        piecePosition = new Position(3, destiny.column);
+                    else
+                        piecePosition = new Position(4, destiny.column);
+
+                    chessboard.InsertPiece(pawn, piecePosition);
+                }
+            }
         }
 
         public void PerformMove(Position origin, Position destiny)
@@ -117,6 +154,14 @@ namespace Chess
                 turn++;
                 ChangePlayer();
             }
+
+            Piece piece = chessboard.Piece(destiny);
+
+            //Special play En Passant
+            if (piece is Pawn && (destiny.line == origin.line - 2 || destiny.line == origin.line + 2))
+                vulnerableEnPassant = piece;
+            else
+                vulnerableEnPassant = null;
         }
 
         public void ValidateOriginPosition(Position position)

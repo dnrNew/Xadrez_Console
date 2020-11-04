@@ -5,8 +5,11 @@ namespace XadrezConsole.Chess
 {
     class Pawn : Piece
     {
-        public Pawn(Chessboard chessboard, Color color) : base(chessboard, color)
-        {           
+        private GameChess game;
+
+        public Pawn(Chessboard chessboard, Color color, GameChess game) : base(chessboard, color)
+        {
+            this.game = game;
         }
 
         public override string ToString()
@@ -52,6 +55,20 @@ namespace XadrezConsole.Chess
 
                 if (chessboard.PositionValidated(matrixPosition) && ExistOpponent(matrixPosition))
                     matrix[matrixPosition.line, matrixPosition.column] = true;
+
+                //Special play En Passant
+                if (position.line == 3)
+                {
+                    Position left = new Position(position.line, position.column - 1);
+
+                    if (chessboard.PositionValidated(left) && ExistOpponent(left) && chessboard.Piece(left) == game.vulnerableEnPassant)
+                        matrix[left.line, left.column] = true;
+
+                    Position right = new Position(position.line, position.column + 1);
+
+                    if (chessboard.PositionValidated(right) && ExistOpponent(right) && chessboard.Piece(right) == game.vulnerableEnPassant)
+                        matrix[right.line, right.column] = true;
+                }
             }
             else
             {
@@ -74,6 +91,20 @@ namespace XadrezConsole.Chess
 
                 if (chessboard.PositionValidated(matrixPosition) && ExistOpponent(matrixPosition))
                     matrix[matrixPosition.line, matrixPosition.column] = true;
+
+                //Special play En Passant
+                if (position.line == 4)
+                {
+                    Position left = new Position(position.line, position.column - 1);
+
+                    if (chessboard.PositionValidated(left) && ExistOpponent(left) && chessboard.Piece(left) == game.vulnerableEnPassant)
+                        matrix[left.line, left.column] = true;
+
+                    Position right = new Position(position.line, position.column + 1);
+
+                    if (chessboard.PositionValidated(right) && ExistOpponent(right) && chessboard.Piece(right) == game.vulnerableEnPassant)
+                        matrix[right.line, right.column] = true;
+                }
             }
 
             return matrix;
