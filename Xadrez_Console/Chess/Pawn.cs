@@ -62,12 +62,12 @@ namespace XadrezConsole.Chess
                     Position left = new Position(position.line, position.column - 1);
 
                     if (chessboard.PositionValidated(left) && ExistOpponent(left) && chessboard.Piece(left) == game.vulnerableEnPassant)
-                        matrix[left.line, left.column] = true;
+                        matrix[left.line - 1, left.column] = true;
 
                     Position right = new Position(position.line, position.column + 1);
 
                     if (chessboard.PositionValidated(right) && ExistOpponent(right) && chessboard.Piece(right) == game.vulnerableEnPassant)
-                        matrix[right.line, right.column] = true;
+                        matrix[right.line -1, right.column] = true;
                 }
             }
             else
@@ -98,12 +98,12 @@ namespace XadrezConsole.Chess
                     Position left = new Position(position.line, position.column - 1);
 
                     if (chessboard.PositionValidated(left) && ExistOpponent(left) && chessboard.Piece(left) == game.vulnerableEnPassant)
-                        matrix[left.line, left.column] = true;
+                        matrix[left.line + 1 , left.column] = true;
 
                     Position right = new Position(position.line, position.column + 1);
 
                     if (chessboard.PositionValidated(right) && ExistOpponent(right) && chessboard.Piece(right) == game.vulnerableEnPassant)
-                        matrix[right.line, right.column] = true;
+                        matrix[right.line + 1, right.column] = true;
                 }
             }
 
