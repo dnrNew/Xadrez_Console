@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Board;
@@ -142,6 +143,22 @@ namespace Chess
                 throw new BoardException("It is not allowed to put in check!");
             }
 
+            Piece piece = chessboard.Piece(destiny);
+
+
+            //Special play Promocao
+            if (piece is Pawn)
+            {
+                if (piece.color == Color.White && destiny.line == 0 || piece.color == Color.Black && destiny.line == 7)
+                {
+                    piece = chessboard.RemovePiece(destiny);
+                    pieces.Remove(piece);
+                    Piece queen = new Queen(chessboard, piece.color); //To Do add choice of piece for user
+                    chessboard.InsertPiece(queen, destiny);
+                    pieces.Add(queen);
+                }
+            }
+
             if (IsCheck(OpponentColor(playCurrent)))
                 check = true;
             else
@@ -153,9 +170,7 @@ namespace Chess
             {
                 turn++;
                 ChangePlayer();
-            }
-
-            Piece piece = chessboard.Piece(destiny);
+            }           
 
             //Special play En Passant
             if (piece is Pawn && (destiny.line == origin.line - 2 || destiny.line == origin.line + 2))
